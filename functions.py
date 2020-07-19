@@ -23,11 +23,10 @@ def capitalize_first_letter_in_each_word(user_input):
 ## // Start: call functions
 def call_search_billionaire(df):
     while True:
-        assets_persons_name = input("Enter persons name: ")
-        new_name = capitalize_first_letter_in_each_word(assets_persons_name)
-        df_to_search = df[:].fillna('')
-        df_to_search2 = (df_to_search[columns_main])
-        match = df_to_search2[df_to_search2['name'].str.match(new_name)]
+        search_person = input("Enter persons name: ")
+        new_name = capitalize_first_letter_in_each_word(search_person)
+        df_to_search2 = (df[columns_main])
+        match = df_to_search2[df['name'].str.match(new_name)]
         try:
             if not match.empty:
                 print(match)
@@ -48,9 +47,8 @@ def call_assets_person_name(df):
     while True:
         assets_persons_name = input("Enter persons name: ")
         new_name = capitalize_first_letter_in_each_word(assets_persons_name)
-        df_to_search = df[:].fillna('')
-        df_to_search2 = (df_to_search[columns_main])
-        match = df_to_search2[df_to_search2['name'].str.match(new_name)]
+        df_to_search2 = (df[columns_main])
+        match = df_to_search2[df['name'].str.match(new_name)]
         try:
             if not match.empty:
                 print(df_to_search2[['financialAssets']])

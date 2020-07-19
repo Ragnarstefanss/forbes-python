@@ -14,18 +14,14 @@ from functions import *
 with urllib.request.urlopen("https://forbes400.herokuapp.com/api/forbes400?limit=10") as url:
     data = json.loads(url.read().decode())
 
-df = pd.json_normalize(data)
-df.drop(['name'], axis=1, inplace=True)
+df_json = pd.json_normalize(data)
+df_json.drop(['name'], axis=1, inplace=True)
 
-df.rename(columns = {'personName':'name'}, inplace=True)
-df.rename(columns = {'finalWorth':'net_worth'}, inplace=True)
+df_json.rename(columns = {'personName':'name'}, inplace=True)
+df_json.rename(columns = {'finalWorth':'net_worth'}, inplace=True)
+df = df_json[:].fillna('')
 #print(df.info())
 
-#print (df[columns_main])
-
-
-    
-    
 # Options menu
 def options(): 
     while True:
