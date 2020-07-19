@@ -22,13 +22,46 @@ df.rename(columns = {'finalWorth':'net_worth'}, inplace=True)
 columns_main =  ['rank', 'name', 'net_worth', 'countryOfCitizenship', 'source', 'gender', 'financialAssets', 'estWorthPrev', 'privateAssetsWorth']
 #print (df[columns_main])
 
-## // Start: Functions
+## // Start: Assistant functions
 
+def capitalize_first_letter_in_each_word(user_input):
+    strList = user_input.split()
+    new_string = ''
+    for val in strList:
+        new_string += val.capitalize()+ ' '
+    return new_string.strip()
+
+## // End: Assistant functions
+
+## // Start: Main Functions
+
+def call_search_billions():
+   billions_value = input("Enter amount in billions: ")
+   search_billions(billions_value)
+   
+def call_assets_person_name():
+    while True:
+        assets_persons_name = input("Enter persons name: ")
+        new_name = capitalize_first_letter_in_each_word(assets_persons_name)
+        df_to_search = df[:].fillna('')
+        df_to_search2 = (df_to_search[columns_main])
+        match = df_to_search2[df_to_search2['name'].str.match(new_name)]
+        try:
+            if not match.empty:
+                print(match)
+                break
+            else:
+                print("No person by that name")
+                
+                continue
+        except ValueError:
+            print ("call_assets_persons_name ValueError")
+            continue   
 # Options menu
 def options(): 
     while True:
         max_value = 5
-        print("Search by \n",
+        print("\n Search by \n",
               "\n",
               "1. More than <value> Billions -> search_billions(<value>) \n",
               "2. Country -> search_country(<country name>) \n"
@@ -43,8 +76,13 @@ def options():
                 #print ('Enter a valid number')
                 #continue
             if user_input == 1:
-                billions_value = input("Enter amount in billions: ")
-                search_billions(billions_value)
+                call_search_billions()
+            if user_input == 2:
+                continue
+            if user_input == 3:
+                continue
+            if user_input == 4:
+                call_assets_person_name()
             elif user_input == 5:
                 break
         except ValueError:
