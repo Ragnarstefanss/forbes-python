@@ -8,7 +8,8 @@ import urllib.request, json
 import pandas as pd 
 import warnings
 warnings.filterwarnings('ignore')
-pd.set_option('display.max_columns',25)
+from pprint import pprint
+pd.options.display.max_columns = None
 from functions import *
 
 with urllib.request.urlopen("https://forbes400.herokuapp.com/api/forbes400?limit=10") as url:

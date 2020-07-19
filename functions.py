@@ -4,7 +4,7 @@ Created on Sun Jul 19 14:26:06 2020
 
 @author: Ragnar
 """
-
+from pprint import pprint
 columns_main =  ['rank', 'name', 'net_worth', 'countryOfCitizenship', 'source', 'gender', 'financialAssets', 'estWorthPrev', 'privateAssetsWorth']
 columns_financial_assets = ['financialAssets']
 # ----------------------------------------------------------- #
@@ -29,7 +29,14 @@ def search_by_name(df, call_type):
                 if(call_type == "search_billionaire"):
                     print(match)
                 elif(call_type == "search_assets"):
-                    print(match[['financialAssets']])
+                    print(match[columns_financial_assets])
+                print("Do you want to save " + new_name + " assets to html file")
+                search_person = input("< yes | no >: ")
+                if(search_person == 'y' or search_person == 'yes'):
+                    pprint(match[columns_financial_assets])
+                    #match[columns_financial_assets].to_html(new_name + '_assets.html')
+                else:
+                    print("no html file created")
                 break
             else:
                 print("No person by that name")
@@ -45,6 +52,7 @@ def call_search_billionaire(df):
     search_by_name(df, "search_billionaire")
 
 def call_search_billions(df):
+    #TODO: error check for input 'not int'
    billions_value = input("Enter amount in billions: ")
    search_billions(df, billions_value)
    
