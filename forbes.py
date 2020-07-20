@@ -11,6 +11,7 @@ warnings.filterwarnings('ignore')
 from pprint import pprint
 pd.options.display.max_columns = None
 from functions import *
+import datetime
 
 with urllib.request.urlopen("https://forbes400.herokuapp.com/api/forbes400?limit=10") as url:
     data = json.loads(url.read().decode())
@@ -26,7 +27,7 @@ df = df_json[:].fillna('')
 # Options menu
 def options(): 
     while True:
-        max_value = 6
+        
         print("\n Search by \n",
               "\n",
               "1. Search billionaire by name -> search_billionaire(<persons name>) \n"
@@ -34,9 +35,10 @@ def options():
               "3. Country -> search_country(<country name>) \n"
               "4. Gender -> search_gender(< m | f > \n"
               "5. Persons Assets -> assets(<persons name>, :number_of_shares)\n"
-              "6. QUIT"
+              "6. Create a histogram\n"
+              "7. QUIT"
         )
-        
+        max_value = 7
         user_input = int(input("Enter a number: "))
         try:
             if(int(user_input) <= 0 or int(user_input) > max_value):
@@ -53,7 +55,9 @@ def options():
                 continue
             if user_input == 5:
                 call_assets_person_name(df)
-            elif user_input == 6:
+            if user_input == 6:
+                call_create_plot(df)
+            elif user_input == 7:
                 break
         except ValueError:
             print ('Enter a valid number')
