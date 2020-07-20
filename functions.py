@@ -7,6 +7,7 @@ Created on Sun Jul 19 14:26:06 2020
 from pprint import pprint
 import datetime
 import time;
+from datetime import date
 import numpy as np
 columns_main =  ['rank', 'name', 'net_worth', 'countryOfCitizenship', 'source', 'gender', 'financialAssets', 'estWorthPrev', 'privateAssetsWorth']
 columns_financial_assets = ['financialAssets']
@@ -69,9 +70,12 @@ def call_create_plot(df):
     #hist, scatter, etc..
     for index, row in df.iterrows():
         birthDate = (row['birthDate'] / 1000)
-        datetime_time = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
-        print(datetime_time)
-    #df.plot(x="age")
+        datetime_birthDate = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
+        #today = date.today().strftime('%d/%m/%Y')
+        #converted = datetime_time.strftime('%d/%m/%Y')
+        today = date.today() 
+        age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day)) 
+        print(age)
     
 
 ## // End: call functions
