@@ -9,8 +9,12 @@ import datetime
 import time;
 from datetime import date
 import numpy as np
+import matplotlib.pyplot as plt
+
+#columns
 columns_main =  ['rank', 'name', 'net_worth', 'countryOfCitizenship', 'source', 'gender', 'financialAssets', 'estWorthPrev', 'privateAssetsWorth']
 columns_financial_assets = ['financialAssets']
+
 # ----------------------------------------------------------- #
 ## // Start: Assistant functions
 
@@ -68,15 +72,16 @@ def call_search_country(df):
 
 def call_create_plot(df):
     #hist, scatter, etc..
+    age_list = []
     for index, row in df.iterrows():
+        today = date.today() 
         birthDate = (row['birthDate'] / 1000)
         datetime_birthDate = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
-        #today = date.today().strftime('%d/%m/%Y')
-        #converted = datetime_time.strftime('%d/%m/%Y')
-        today = date.today() 
         age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day)) 
-        print(age)
-    
+        age_list.append(age)
+    df['age'] = age_list
+    df.plot(x="age", y="net_worth", kind="scatter")
+    plt.show()
 
 ## // End: call functions
 # ----------------------------------------------------------- #

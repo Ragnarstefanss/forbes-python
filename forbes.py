@@ -13,7 +13,11 @@ pd.options.display.max_columns = None
 from functions import *
 import datetime
 
-with urllib.request.urlopen("https://forbes400.herokuapp.com/api/forbes400?limit=10") as url:
+# Program still in DEV mode so I want to quickly be able to change url without losing old url
+#url = "https://forbes400.herokuapp.com/api/forbes400"
+url = "https://forbes400.herokuapp.com/api/forbes400?limit=10"
+
+with urllib.request.urlopen(url) as url:
     data = json.loads(url.read().decode())
 
 df_json = pd.json_normalize(data)
