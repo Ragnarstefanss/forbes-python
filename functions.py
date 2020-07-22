@@ -75,10 +75,12 @@ def call_create_plot(df):
     new_df = df[:]
     age_list = []
     for index, row in new_df.iterrows():
+        age = 0
         today = date.today() 
-        birthDate = int((row['birthDate']) / 1000)
-        datetime_birthDate = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
-        age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day)) 
+        if row['birthDate' != 0]:
+            birthDate = int((row['birthDate']) / 1000)
+            datetime_birthDate = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
+            age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day))
         age_list.append(age)
     new_df['age'] = age_list
     new_df.plot(x="age", y="net_worth", kind="scatter")

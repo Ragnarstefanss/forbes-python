@@ -15,7 +15,7 @@ import datetime
 
 # Program still in DEV mode so I want to quickly be able to change url without losing old url
 #url = "https://forbes400.herokuapp.com/api/forbes400"
-url = "https://forbes400.herokuapp.com/api/forbes400?limit=10"
+url = "https://forbes400.herokuapp.com/api/forbes400?limit=150"
 
 with urllib.request.urlopen(url) as url:
     data = json.loads(url.read().decode())
@@ -26,9 +26,29 @@ df_json.drop(['name'], axis=1, inplace=True)
 
 df_json.rename(columns = {'personName':'name'}, inplace=True)
 df_json.rename(columns = {'finalWorth':'net_worth'}, inplace=True)
-df = df_json[:].fillna('')
+df = df_json[:]
 
-#print(df.info())
+#Fill in nan values
+df['bio'] = df['state'].fillna('no bio')
+df['state'] = df['state'].fillna('unknown')
+df['city'] = df['city'].fillna('unknown')
+df['gender'] = df['gender'].fillna('unknown')
+df['birthDate'] = df['birthDate'].fillna(0)
+#df['financialAssets']
+#df['shortUri']
+#df['listShortUri']
+#df['privateAssetsWorth']
+#df['archivedWorth']
+#df['thumbnail']
+#df['squareImage']
+#df['bios']
+#df['abouts']
+#df['person.squareImage ']
+
+#print(df.isnull().sum()) 
+print(df.info())
+
+
 def valid_user_input(number, max_value):
     if(int(number) <= 0 or int(number) > max_value):
         print ('Enter a valid number')
