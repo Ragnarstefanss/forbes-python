@@ -26,7 +26,7 @@ df_json.drop(['name'], axis=1, inplace=True)
 
 df_json.rename(columns = {'personName':'name'}, inplace=True)
 df_json.rename(columns = {'finalWorth':'net_worth'}, inplace=True)
-df = df_json[:].fillna(0, inplace=True)
+df = df_json[:].fillna('')
 
 #print(df.info())
 def valid_user_input(number, max_value):
@@ -87,7 +87,7 @@ def main_options():
                 search_options()
             if user_input == 2:
                 #2. Investment assets
-                call_assets_person_name(df)(df)
+                call_assets_person_name(df)
             if user_input == 3:
                 #3. Create plots
                 call_create_plot(df)
