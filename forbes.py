@@ -81,7 +81,7 @@ def search_options():
                 #3. Net worh over <X> billions
                 call_search_billions(df)
             if user_input == 4:
-                #4. Contry
+                #4. Country
                 call_search_country(df)
             elif user_input == max_value:
                 break
@@ -95,9 +95,10 @@ def main_options():
         print("1. Search billionaires\n",
               "2. Show billionaires investment assets\n",
               "3. Create graphs\n",
-              "4. Quit\n",
+              "4. Source of wealth\n"
+              "5. Quit\n",
         )
-        max_value = 4
+        max_value = 5
         user_input = int(input("Enter a number: "))
         try:
             if(valid_user_input(user_input, max_value) != True):
@@ -111,6 +112,9 @@ def main_options():
             if user_input == 3:
                 #3. Create plots
                 call_create_plot(df)
+            if user_input == 4:
+                #. Create dict for source of wealth
+                call_source_of_wealth(df)
             elif user_input == max_value:
                 break
         except ValueError:
@@ -121,5 +125,5 @@ def main_options():
 ## // END: Main functions
 
 # call options menu    
-#main_options()
-call_create_plot(df)   
+main_options()
+#call_create_plot(df)

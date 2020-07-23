@@ -92,7 +92,12 @@ def call_create_plot(df):
     ax.set_ylabel("Net worth (in billions)")
     plt.show()
 
-
+def call_source_of_wealth(df):
+    counts = dict()
+    for i in df['source']:
+        counts[i] = counts.get(i, 0) + 1
+    dict_sorted = sorted(counts.items(), key=lambda x: x[1], reverse=True)
+    print(dict_sorted)
 ## // End: call functions
 # ----------------------------------------------------------- #
     
