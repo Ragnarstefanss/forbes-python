@@ -15,7 +15,7 @@ import datetime
 
 # Program still in DEV mode so I want to quickly be able to change url without losing old url
 #url = "https://forbes400.herokuapp.com/api/forbes400"
-url = "https://forbes400.herokuapp.com/api/forbes400?limit=150"
+url = "https://forbes400.herokuapp.com/api/forbes400"
 
 with urllib.request.urlopen(url) as url:
     data = json.loads(url.read().decode())
@@ -46,7 +46,7 @@ df['birthDate'] = df['birthDate'].fillna(0)
 #df['person.squareImage ']
 
 #print(df.isnull().sum()) 
-print(df.info())
+#print(df.info())
 
 
 def valid_user_input(number, max_value):
@@ -121,5 +121,5 @@ def main_options():
 ## // END: Main functions
 
 # call options menu    
-main_options()
-    
+#main_options()
+call_create_plot(df)   

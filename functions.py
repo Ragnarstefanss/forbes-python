@@ -10,6 +10,9 @@ import time;
 from datetime import date
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
+df = sns.load_dataset('iris')
+
 
 #columns
 columns_main =  ['rank', 'name', 'net_worth', 'countryOfCitizenship', 'source', 'gender', 'financialAssets', 'estWorthPrev', 'privateAssetsWorth']
@@ -83,7 +86,10 @@ def call_create_plot(df):
             age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day))
         age_list.append(age)
     new_df['age'] = age_list
-    new_df.plot(x="age", y="net_worth", kind="scatter")
+    new_df['net_worth_divided'] = new_df['net_worth'] / 1000
+    ax = new_df.plot(x="age", y="net_worth_divided", kind="scatter", title="Net worth by age", color='red')
+    ax.set_xlabel("Age")
+    ax.set_ylabel("Net worth (in billions)")
     plt.show()
 
 
