@@ -4,6 +4,7 @@ Created on Sun Jul 19 14:26:06 2020
 
 @author: Ragnar
 """
+import pandas as pd
 from pprint import pprint
 import datetime
 import time;
@@ -104,7 +105,13 @@ def call_source_of_wealth(df):
     print(dict_sorted)
  
 def call_age_graph(df):
-    return 0
+    new_df = get_all_age_and_networth(df)
+    ages = pd.DataFrame(new_df['age'], columns=['age'])
+    bins = [18, 30, 40, 50, 60, 70, 120]
+    labels = ['18-29', '30-39', '40-49', '50-59', '60-69', '70+']
+    ages['agerange'] = pd.cut(ages.age, bins, labels = labels,include_lowest = True)
+    print(ages)
+    
 ## // End: call functions
 # ----------------------------------------------------------- #
     
