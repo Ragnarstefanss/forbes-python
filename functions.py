@@ -54,7 +54,22 @@ def search_by_name(df, call_type):
                 continue
         except ValueError:
             print ("call_assets_persons_name ValueError")
-            continue 
+            continue
+def get_all_age_and_networth(df):
+    new_df = df[:]
+    age_list = []
+    for index, row in new_df.iterrows():
+        age = 0
+        today = date.today() 
+        if row['birthDate' != 0]:
+            birthDate = int((row['birthDate']) / 1000)
+            datetime_birthDate = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
+            age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day))
+        age_list.append(age)
+    new_df['age'] = age_list
+    new_df['net_worth_divided'] = new_df['net_worth'] / 1000    
+    return new_df
+
 ## // End: Assistant functions
 # ----------------------------------------------------------- #
     
@@ -75,18 +90,7 @@ def call_search_country(df):
 
 def call_create_plot(df):
     #hist, scatter, etc..
-    new_df = df[:]
-    age_list = []
-    for index, row in new_df.iterrows():
-        age = 0
-        today = date.today() 
-        if row['birthDate' != 0]:
-            birthDate = int((row['birthDate']) / 1000)
-            datetime_birthDate = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=(birthDate))
-            age = today.year - datetime_birthDate.year - ((today.month, today.day) < (datetime_birthDate.month, datetime_birthDate.day))
-        age_list.append(age)
-    new_df['age'] = age_list
-    new_df['net_worth_divided'] = new_df['net_worth'] / 1000
+    new_df = get_all_age_and_networth(df)
     ax = new_df.plot(x="age", y="net_worth_divided", kind="scatter", title="Net worth by age", color='red')
     ax.set_xlabel("Age")
     ax.set_ylabel("Net worth (in billions)")
@@ -98,6 +102,9 @@ def call_source_of_wealth(df):
         counts[i] = counts.get(i, 0) + 1
     dict_sorted = sorted(counts.items(), key=lambda x: x[1], reverse=True)
     print(dict_sorted)
+ 
+def call_age_graph(df):
+    return 0
 ## // End: call functions
 # ----------------------------------------------------------- #
     

@@ -95,10 +95,11 @@ def main_options():
         print("1. Search billionaires\n",
               "2. Show billionaires investment assets\n",
               "3. Create graphs\n",
-              "4. Source of wealth\n"
-              "5. Quit\n",
+              "4. Source of wealth\n",
+              "5. Age buckets by wealth\n"
+              "6. Quit\n",
         )
-        max_value = 5
+        max_value = 6
         user_input = int(input("Enter a number: "))
         try:
             if(valid_user_input(user_input, max_value) != True):
@@ -113,8 +114,11 @@ def main_options():
                 #3. Create plots
                 call_create_plot(df)
             if user_input == 4:
-                #. Create dict for source of wealth
+                #4. Create dict for source of wealth
                 call_source_of_wealth(df)
+            if user_input == 5:
+                #5. s
+                call_age_graph(df)
             elif user_input == max_value:
                 break
         except ValueError:
